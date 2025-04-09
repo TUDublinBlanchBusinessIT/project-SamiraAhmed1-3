@@ -1,8 +1,11 @@
 <?php
+
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ShoppingController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
-
 Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
 
 Route::get('/', function () {
@@ -10,7 +13,10 @@ Route::get('/', function () {
 });
 
 
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/shop', [ShoppingController::class, 'index'])->name('shop');
