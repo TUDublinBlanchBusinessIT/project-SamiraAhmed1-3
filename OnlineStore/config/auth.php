@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'web',  // Default to 'web' guard for admins
+        'passwords' => 'users', // Default password resets for users
     ],
 
     /*
@@ -38,7 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users',  // Admins
+        ],
+
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',  // Customers
         ],
     ],
 
@@ -62,13 +67,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\User::class,  // Use User model for admin
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,  // Use Customer model for customers
+        ],
     ],
 
     /*
@@ -88,7 +93,14 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'users',  // Password reset for users (admins)
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'customers' => [
+            'provider' => 'customers',  // Password reset for customers
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
@@ -107,5 +119,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

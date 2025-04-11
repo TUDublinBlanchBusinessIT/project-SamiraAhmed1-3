@@ -36,7 +36,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->save();
 
-        // Redirect to a success page or customer list
-        return redirect()->route('customers.create')->with('success', 'Customer created successfully!');
+        // Redirect to the login page after successful customer creation
+        return redirect()->route('customer.login-new')->with('success', 'Account created successfully! Please login.');
     }
 }
