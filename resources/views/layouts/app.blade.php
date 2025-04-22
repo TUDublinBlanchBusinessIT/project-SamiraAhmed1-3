@@ -69,10 +69,11 @@
     <div id="sidebar">
         <ul class="list-unstyled">
             <li><a href="{{ route('shop') }}">🧵 All Yarn</a></li>
-            <li><a href="#">🧶 Wool</a></li>
+            <li><a href="{{ route('shop.wool') }}">🧶 Wool</a></li>
             <li><a href="#">🌾 Cotton</a></li>
             <li><a href="#">💧 Acrylic</a></li>
-            <li><a href="#">🧺 Accessories</a></li>
+            <li><a href="#">🪡 Knitting Needles</a></li>
+            <li><a href="#">🧵 Crochet Hooks</a></li>
         </ul>
     </div>
 

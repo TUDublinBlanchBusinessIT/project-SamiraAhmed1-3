@@ -12,4 +12,10 @@ class ShoppingController extends Controller
         $products = Product::all();
         return view('shop.index', compact('products'));
     }
+
+    public function wool()
+    {
+        $products = Product::where('material', 'Wool')->get();
+        return view('shop.wool', compact('products'));
+    }
 }

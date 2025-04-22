@@ -15,7 +15,6 @@ Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/login', [CustomerLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [CustomerLoginController::class, 'login'])->name('login.post');
     Route::post('/logout', [CustomerLoginController::class, 'logout'])->name('logout');
-
 });
 
 // Customer dashboard
@@ -39,3 +38,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShoppingController::class, 'index'])
     ->middleware('auth:customer')
     ->name('shop');
+
+// ➕ Wool category page
+Route::get('/shop/wool', [ShoppingController::class, 'wool'])
+    ->middleware('auth:customer')
+    ->name('shop.wool');
