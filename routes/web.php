@@ -36,4 +36,6 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Customer shopping
-Route::get('/shop', [ShoppingController::class, 'index'])->name('shop');
+Route::get('/shop', [ShoppingController::class, 'index'])
+    ->middleware('auth:customer')
+    ->name('shop');

@@ -15,16 +15,19 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+
+            // If request path starts with 'admin' -> redirect to admin login
             if ($request->is('admin') || $request->is('admin/*')) {
                 return route('admin.login');
             }
 
+            // If request path starts with 'customer' -> redirect to customer login
             if ($request->is('customer') || $request->is('customer/*')) {
                 return route('customer.login');
             }
 
-            return route('login'); // fallback for other cases
+            // Fallback: redirect to general login (if exists)
+            return route('login');
         }
     }
 }
-
