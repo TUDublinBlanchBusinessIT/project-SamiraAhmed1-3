@@ -7,18 +7,17 @@ use App\Models\Product;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         Product::create([
-            'name' => 'Sample Product',
-            'description' => 'This is a sample product for the shop.',
-            'price' => 29.99,
-            'image' => 'sample.jpg'
+            'name' => 'Cozy Wool Yarn',
+            'material' => 'Wool',
+            'weight' => 'Aran',
+            'color' => 'Forest Green',
+            'length' => 150,
+            'price' => 4.99,
+            'description' => 'Soft and warm yarn, perfect for winter scarves and hats.',
+            'image' => 'cozy_wool_forest.png'
         ]);
     }
 }

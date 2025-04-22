@@ -11,9 +11,13 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('material'); // e.g., Cotton, Wool, Acrylic
+            $table->string('weight')->nullable(); // e.g., DK, Aran, Bulky
+            $table->string('color')->nullable(); // e.g., Red, Forest Green
+            $table->integer('length')->nullable(); // in meters
             $table->decimal('price', 8, 2);
-            $table->string('image')->nullable(); // Optional image path
+            $table->text('description')->nullable();
+            $table->string('image')->nullable(); // image path like yarn_red.png
             $table->timestamps();
         });
     }
