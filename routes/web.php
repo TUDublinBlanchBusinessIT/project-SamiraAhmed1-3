@@ -43,3 +43,22 @@ Route::get('/shop', [ShoppingController::class, 'index'])
 Route::get('/shop/wool', [ShoppingController::class, 'wool'])
     ->middleware('auth:customer')
     ->name('shop.wool');
+
+// ➕ Add to Cart
+Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])
+    ->middleware('auth:customer')
+    ->name('cart.add');
+
+// 🛒 View Cart Page
+Route::get('/cart', [ShoppingController::class, 'cart'])
+    ->middleware('auth:customer')
+    ->name('cart.index');
+
+// ✅ Checkout
+Route::get('/checkout', [ShoppingController::class, 'checkout'])
+    ->middleware('auth:customer')
+    ->name('checkout.index');
+
+Route::post('/checkout', [ShoppingController::class, 'placeOrder'])
+    ->middleware('auth:customer')
+    ->name('checkout.place');

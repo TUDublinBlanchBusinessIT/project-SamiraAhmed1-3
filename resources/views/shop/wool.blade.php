@@ -25,7 +25,7 @@
                             <p class="card-text"><strong>Material:</strong> {{ $product->material }}</p>
                             <p class="card-text"><strong>Price:</strong> €{{ number_format($product->price, 2) }}</p>
                             <p class="card-text">{{ $product->description }}</p>
-                            <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                            <a href="{{ route('cart.add', $product->id) }}" class="btn btn-success btn-block">Add to Cart</a>
                         </div>
                     </div>
                 </div>

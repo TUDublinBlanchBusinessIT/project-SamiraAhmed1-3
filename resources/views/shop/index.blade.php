@@ -16,6 +16,12 @@
     </div>
 
     <div class="container">
+        @if(session('success'))
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="row">
             @foreach($products as $product)
                 <div class="col-md-4 mb-4">
@@ -39,7 +45,7 @@
                             <p class="card-text"><strong>Price:</strong> €{{ number_format($product->price, 2) }}</p>
                             <p class="card-text">{{ $product->description }}</p>
 
-                            <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                            <a href="{{ route('cart.add', $product->id) }}" class="btn btn-success btn-block">Add to Cart</a>
                         </div>
                     </div>
                 </div>
