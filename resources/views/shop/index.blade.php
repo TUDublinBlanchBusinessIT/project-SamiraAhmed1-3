@@ -17,7 +17,7 @@
 
     <div class="container">
         @if(session('success'))
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success text-center" id="success-alert">
                 {{ session('success') }}
             </div>
         @endif
@@ -70,4 +70,16 @@
         </div>
     </div>
 </div>
+
+<!-- Fade out alert script -->
+<script>
+    setTimeout(function() {
+        const alert = document.getElementById('success-alert');
+        if (alert) {
+            alert.style.transition = "opacity 0.5s ease";
+            alert.style.opacity = 0;
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 2000);
+</script>
 @endsection
