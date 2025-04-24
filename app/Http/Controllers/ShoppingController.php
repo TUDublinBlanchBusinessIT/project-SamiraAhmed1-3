@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
+use Illuminate\Support\Facades\Auth;
 
 class ShoppingController extends Controller
 {
@@ -54,8 +57,33 @@ class ShoppingController extends Controller
 
     public function placeOrder(Request $request)
     {
-        // For demo purposes: just clear the cart and show a success message
+        $cart = session()->get('cart', []);
+        
+        if (empty($cart)) {
+            return redirect()->route('shop')->with('error', 'Your cart is empty.');
+        }
+
+        // Create the order
+        $order = Order::create([
+            'customer_id' => Auth::guard('customer')->id(),
+            'total' => collect($cart)->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            }),
+        ]);
+
+        // Create order items
+        foreach ($cart as $productId => $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $productId,
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
+        // Clear cart
         session()->forget('cart');
+
         return redirect()->route('shop')->with('success', 'Your order has been placed successfully!');
     }
 }

@@ -20,5 +20,10 @@ class Customer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-}
 
+    // 🔗 Relationship: A customer has many orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+}
