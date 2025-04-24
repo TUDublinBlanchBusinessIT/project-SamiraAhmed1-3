@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;  // Assuming you're using the default User model
+use App\Models\User;
+use App\Models\Customer;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -26,7 +28,7 @@ class UserController extends Controller
         // Attempt to log the user in using the 'web' guard (for admins)
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
             // Redirect to the admin dashboard or intended page
-            return redirect()->intended('/admin/dashboard'); // Ensure /admin/dashboard exists
+            return redirect('/admin/dashboard'); // Ensure /admin/dashboard exists
         }
 
         // Return error if login fails
@@ -37,7 +39,20 @@ class UserController extends Controller
     public function logout()
     {
         Auth::guard('web')->logout(); // Log out the user (admin)
-        return redirect('/login'); // Redirect to the login page after logout
+        return redirect('/admin/login'); // Redirect to the admin login page
+    }
+
+    // Admin: View all customers
+    public function viewCustomers()
+    {
+        $customers = Customer::all();
+        return view('admin.customers', compact('customers'));
+    }
+
+    // Admin: View all orders with relationships
+    public function viewOrders()
+    {
+        $orders = Order::with(['customer', 'items.product'])->get();
+        return view('admin.orders', compact('orders'));
     }
 }
-

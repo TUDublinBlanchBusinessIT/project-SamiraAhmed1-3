@@ -62,3 +62,12 @@ Route::get('/checkout', [ShoppingController::class, 'checkout'])
 Route::post('/checkout', [ShoppingController::class, 'placeOrder'])
     ->middleware('auth:customer')
     ->name('checkout.place');
+
+// 🛠️ Admin-only: View Customers and Orders
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/customers', [App\Http\Controllers\UserController::class, 'viewCustomers'])->name('admin.customers');
+    Route::get('/admin/orders', [App\Http\Controllers\UserController::class, 'viewOrders'])->name('admin.orders');
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
