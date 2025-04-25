@@ -27,8 +27,14 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.customers') }}">Customers</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.orders') }}">Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('admin.logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                <li class="nav-item">
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-light btn-sm ml-2">
+                            🔓 Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
@@ -36,8 +42,6 @@
     <main class="py-4 container">
         @yield('content')
     </main>
-
-    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">@csrf</form>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

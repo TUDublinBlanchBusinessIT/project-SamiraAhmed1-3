@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -62,20 +60,25 @@
     </style>
 </head>
 <body>
+
     <!-- Hamburger Button -->
-    <button id="sidebarToggle" class="btn btn-outline-dark">&#9776;</button>
+    @auth('customer')
+        <button id="sidebarToggle" class="btn btn-outline-dark">&#9776;</button>
+    @endauth
 
     <!-- Sidebar -->
-    <div id="sidebar">
-        <ul class="list-unstyled">
-            <li><a href="{{ route('shop') }}">🧵 All Yarn</a></li>
-            <li><a href="{{ route('shop.wool') }}">🧶 Wool</a></li>
-            <li><a href="#">🌾 Cotton</a></li>
-            <li><a href="#">💧 Acrylic</a></li>
-            <li><a href="#">🪡 Knitting Needles</a></li>
-            <li><a href="#">🧵 Crochet Hooks</a></li>
-        </ul>
-    </div>
+    @auth('customer')
+        <div id="sidebar">
+            <ul class="list-unstyled">
+                <li><a href="{{ route('shop') }}">🧵 All Yarn</a></li>
+                <li><a href="{{ route('shop.wool') }}">🧶 Wool</a></li>
+                <li><a href="#">🌾 Cotton</a></li>
+                <li><a href="#">💧 Acrylic</a></li>
+                <li><a href="#">🪡 Knitting Needles</a></li>
+                <li><a href="#">🧵 Crochet Hooks</a></li>
+            </ul>
+        </div>
+    @endauth
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -92,41 +95,43 @@
                     <ul class="navbar-nav me-auto"></ul>
 
                     <ul class="navbar-nav ms-auto">
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('cart.index') }}">
-            🛒 Cart
-            @php $cart = session('cart', []); @endphp
-            @if(count($cart) > 0)
-                <span class="badge badge-pill badge-success">{{ count($cart) }}</span>
-            @endif
-        </a>
-    </li>
+                        @auth('customer')
+                            @php $cart = session('cart', []); @endphp
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('cart.index') }}">
+                                    🛒 Cart
+                                    @if(count($cart) > 0)
+                                        <span class="badge badge-pill badge-success">{{ count($cart) }}</span>
+                                    @endif
+                                </a>
+                            </li>
 
-    @guest
-        @if (Route::has('login'))
-            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-        @endif
-        @if (Route::has('register'))
-            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-        @endif
-    @else
-        <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }}
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-            </div>
-        </li>
-    @endguest
-</ul>
-
+                            <li class="nav-item">
+                                <form id="logout-form-customer" action="{{ route('customer.logout') }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger btn-sm ml-2" style="margin-top:6px;">
+                                        🔓 Logout
+                                    </button>
+                                </form>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="btn btn-outline-primary btn-sm ml-2" href="{{ route('admin.login') }}" style="margin-top:6px;">
+                                    👤 Admin Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-success btn-sm ml-2" href="{{ route('customer.login') }}" style="margin-top:6px;">
+                                    🛒 Customer Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-warning btn-sm ml-2" href="{{ route('customers.create') }}" style="margin-top:6px;">
+                                    ➕ Register
+                                </a>
+                            </li>
+                        @endauth
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -140,13 +145,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 
     <!-- Sidebar Toggle Script -->
     <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('sidebarToggle')?.addEventListener('click', function () {
             const sidebar = document.getElementById('sidebar');
             sidebar.style.left = (sidebar.style.left === '0px') ? '-250px' : '0px';
         });
