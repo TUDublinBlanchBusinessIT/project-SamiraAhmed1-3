@@ -92,46 +92,58 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto"></ul>
+                <ul class="navbar-nav ms-auto">
+    @auth('customer')
+        @php $cart = session('cart', []); @endphp
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('cart.index') }}">
+                🛒 Cart
+                @if(count($cart) > 0)
+                    <span class="badge badge-pill badge-success">{{ count($cart) }}</span>
+                @endif
+            </a>
+        </li>
 
-                    <ul class="navbar-nav ms-auto">
-                        @auth('customer')
-                            @php $cart = session('cart', []); @endphp
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cart.index') }}">
-                                    🛒 Cart
-                                    @if(count($cart) > 0)
-                                        <span class="badge badge-pill badge-success">{{ count($cart) }}</span>
-                                    @endif
-                                </a>
-                            </li>
+        <li class="nav-item">
+            <form id="logout-form-customer" action="{{ route('customer.logout') }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger btn-sm ml-2" style="margin-top:6px;">
+                    🔓 Customer Logout
+                </button>
+            </form>
+        </li>
+    @else
+        @if (Auth::check())
+            <!-- Admin is logged in, show Admin logout -->
+            <li class="nav-item">
+                <form id="logout-form-admin" action="{{ route('admin.logout') }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light btn-sm ml-2" style="margin-top:6px;">
+                        🔓 Admin Logout
+                    </button>
+                </form>
+            </li>
+        @elseif (!request()->is('admin/login'))
+            <!-- Only show login buttons if not admin -->
+            <li class="nav-item">
+                <a class="btn btn-outline-primary btn-sm ml-2" href="{{ route('admin.login') }}" style="margin-top:6px;">
+                    👤 Admin Login
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-success btn-sm ml-2" href="{{ route('customer.login') }}" style="margin-top:6px;">
+                    🛒 Customer Login
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-warning btn-sm ml-2" href="{{ route('customers.create') }}" style="margin-top:6px;">
+                    ➕ Register
+                </a>
+            </li>
+        @endif
+    @endauth
+</ul>
 
-                            <li class="nav-item">
-                                <form id="logout-form-customer" action="{{ route('customer.logout') }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger btn-sm ml-2" style="margin-top:6px;">
-                                        🔓 Logout
-                                    </button>
-                                </form>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="btn btn-outline-primary btn-sm ml-2" href="{{ route('admin.login') }}" style="margin-top:6px;">
-                                    👤 Admin Login
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-success btn-sm ml-2" href="{{ route('customer.login') }}" style="margin-top:6px;">
-                                    🛒 Customer Login
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-warning btn-sm ml-2" href="{{ route('customers.create') }}" style="margin-top:6px;">
-                                    ➕ Register
-                                </a>
-                            </li>
-                        @endauth
-                    </ul>
                 </div>
             </div>
         </nav>

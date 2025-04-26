@@ -48,4 +48,12 @@ class UserController extends Controller
         $orders = Order::with(['customer', 'items.product'])->get();
         return view('admin.orders', compact('orders'));
     }
+
+    public function deleteCustomer($id)
+    {
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
+
+        return redirect()->route('admin.customers')->with('success', 'Customer deleted successfully!');
+    }
 }

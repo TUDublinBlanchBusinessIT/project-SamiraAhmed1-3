@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController; // Make sure this is imported too!
 
 // Customer registration
 Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
@@ -35,39 +36,21 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Customer shopping
-Route::get('/shop', [ShoppingController::class, 'index'])
-    ->middleware('auth:customer')
-    ->name('shop');
+Route::get('/shop', [ShoppingController::class, 'index'])->middleware('auth:customer')->name('shop');
+Route::get('/shop/wool', [ShoppingController::class, 'wool'])->middleware('auth:customer')->name('shop.wool');
+Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])->middleware('auth:customer')->name('cart.add');
+Route::get('/cart', [ShoppingController::class, 'cart'])->middleware('auth:customer')->name('cart.index');
+Route::get('/checkout', [ShoppingController::class, 'checkout'])->middleware('auth:customer')->name('checkout.index');
+Route::post('/checkout', [ShoppingController::class, 'placeOrder'])->middleware('auth:customer')->name('checkout.place');
 
-// ➕ Wool category page
-Route::get('/shop/wool', [ShoppingController::class, 'wool'])
-    ->middleware('auth:customer')
-    ->name('shop.wool');
-
-// ➕ Add to Cart
-Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])
-    ->middleware('auth:customer')
-    ->name('cart.add');
-
-// 🛒 View Cart Page
-Route::get('/cart', [ShoppingController::class, 'cart'])
-    ->middleware('auth:customer')
-    ->name('cart.index');
-
-// ✅ Checkout
-Route::get('/checkout', [ShoppingController::class, 'checkout'])
-    ->middleware('auth:customer')
-    ->name('checkout.index');
-
-Route::post('/checkout', [ShoppingController::class, 'placeOrder'])
-    ->middleware('auth:customer')
-    ->name('checkout.place');
-
-// 🛠️ Admin-only: View Customers and Orders
+// 🛠️ Admin-only routes
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/customers', [App\Http\Controllers\UserController::class, 'viewCustomers'])->name('admin.customers');
-    Route::get('/admin/orders', [App\Http\Controllers\UserController::class, 'viewOrders'])->name('admin.orders');
+    Route::get('/admin/customers', [UserController::class, 'viewCustomers'])->name('admin.customers');
+    Route::get('/admin/orders', [UserController::class, 'viewOrders'])->name('admin.orders');
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+
+    // 🗑️ Delete customer route
+    Route::delete('/admin/customers/{id}', [UserController::class, 'deleteCustomer'])->name('admin.customers.delete');
 });
