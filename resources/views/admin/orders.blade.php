@@ -14,6 +14,20 @@
                         <li>{{ $item->product->name }} - {{ $item->quantity }} × €{{ number_format($item->price, 2) }}</li>
                     @endforeach
                 </ul>
+                <p>Status: {{ $order->status }}</p>
+                
+                <!-- Mark as shipped button -->
+                @if($order->status !== 'Shipped')
+                    <form action="{{ route('admin.orders.update', $order->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button class="btn btn-success btn-sm" onclick="return confirm('Mark this order as shipped?')">
+                            📦 Mark as Shipped
+                        </button>
+                    </form>
+                @else
+                    <span class="badge badge-success">Shipped</span>
+                @endif
             </div>
         </div>
     @endforeach

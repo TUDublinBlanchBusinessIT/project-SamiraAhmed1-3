@@ -56,4 +56,20 @@ class UserController extends Controller
 
         return redirect()->route('admin.customers')->with('success', 'Customer deleted successfully!');
     }
+
+    public function updateOrder($id)
+    {
+        // Find the order by ID
+        $order = Order::find($id);
+
+        // Check if the order exists
+        if ($order) {
+            // Update the status to 'Shipped'
+            $order->status = 'Shipped';
+            $order->save();
+        }
+
+        // Redirect back to the orders page with a success message
+        return redirect()->route('admin.orders')->with('status', 'Order marked as shipped!');
+    }
 }

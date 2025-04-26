@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController; // Make sure this is imported too!
+use App\Http\Controllers\UserController; // Ensure this is imported
 
 // Customer registration
 Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
@@ -35,7 +35,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Customer shopping
+// Customer shopping routes
 Route::get('/shop', [ShoppingController::class, 'index'])->middleware('auth:customer')->name('shop');
 Route::get('/shop/wool', [ShoppingController::class, 'wool'])->middleware('auth:customer')->name('shop.wool');
 Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])->middleware('auth:customer')->name('cart.add');
@@ -53,4 +53,7 @@ Route::middleware('auth')->group(function () {
 
     // 🗑️ Delete customer route
     Route::delete('/admin/customers/{id}', [UserController::class, 'deleteCustomer'])->name('admin.customers.delete');
+    
+    // PUT route for updating order status
+    Route::put('/admin/orders/{id}', [UserController::class, 'updateOrder'])->name('admin.orders.update');
 });
