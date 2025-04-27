@@ -79,6 +79,40 @@ class ProductSeeder extends Seeder
         'description' => 'Soft cotton yarn, ideal for light and airy scarves, shawls, and delicate garments.',
         'image' => 'soft_cotton_skyblue.png'
     ]);
+
+    // Acrylic Products
+    Product::create([ // First Acrylic Yarn
+        'name' => 'Soft Acrylic Yarn',
+        'material' => 'Acrylic',
+        'weight' => 'Worsted',
+        'color' => 'Ocean Blue',
+        'length' => 180,
+        'price' => 3.59,
+        'description' => 'A soft, vibrant acrylic yarn perfect for blankets and home decor.',
+        'image' => 'soft_acrylic_oceanblue.png'
+    ]);
+
+    Product::create([ // Second Acrylic Yarn
+        'name' => 'Bright Acrylic Yarn',
+        'material' => 'Acrylic',
+        'weight' => 'Bulky',
+        'color' => 'Sunset Orange',
+        'length' => 150,
+        'price' => 4.29,
+        'description' => 'Bright and fun bulky acrylic yarn, perfect for cozy scarves and hats.',
+        'image' => 'bright_acrylic_orange.png'
+    ]);
+
+    Product::create([ // Third Acrylic Yarn
+        'name' => 'Smooth Acrylic Yarn',
+        'material' => 'Acrylic',
+        'weight' => 'Sport',
+        'color' => 'Mint Green',
+        'length' => 170,
+        'price' => 3.99,
+        'description' => 'Smooth acrylic yarn, perfect for lightweight summer projects.',
+        'image' => 'smooth_acrylic_mintgreen.png'
+    ]);
 }
 
 }

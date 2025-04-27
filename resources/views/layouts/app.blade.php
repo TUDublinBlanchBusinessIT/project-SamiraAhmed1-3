@@ -73,7 +73,7 @@
                 <li><a href="{{ route('shop') }}">🧵 All Yarn</a></li>
                 <li><a href="{{ route('shop.wool') }}">🧶 Wool</a></li>
                 <li><a href="{{ route('shop.cotton') }}">🌾 Cotton</a></li>
-                <li><a href="#">💧 Acrylic</a></li>
+                <li><a href="{{ route('shop.acrylic') }}">💧 Acrylic</a></li>
                 <li><a href="#">🪡 Knitting Needles</a></li>
                 <li><a href="#">🧵 Crochet Hooks</a></li>
             </ul>

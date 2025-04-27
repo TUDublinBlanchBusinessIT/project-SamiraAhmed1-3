@@ -32,6 +32,14 @@ class ShoppingController extends Controller
         return view('shop.cotton', compact('products'));
     }
     
+    public function acrylic()
+{
+    // Fetch only acrylic products
+    $products = Product::where('material', 'Acrylic')->get();
+
+    // Return the acrylic products view
+    return view('shop.acrylic', compact('products'));
+}
 
     public function addToCart($id)
     {

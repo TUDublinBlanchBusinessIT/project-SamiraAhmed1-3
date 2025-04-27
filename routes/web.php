@@ -39,6 +39,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShoppingController::class, 'index'])->middleware('auth:customer')->name('shop');
 Route::get('/shop/wool', [ShoppingController::class, 'wool'])->middleware('auth:customer')->name('shop.wool');
 Route::get('/shop/cotton', [ShoppingController::class, 'cotton'])->middleware('auth:customer')->name('shop.cotton');
+Route::get('/shop/acrylic', [ShoppingController::class, 'acrylic'])->middleware('auth:customer')->name('shop.acrylic');
 Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])->middleware('auth:customer')->name('cart.add');
 Route::get('/cart', [ShoppingController::class, 'cart'])->middleware('auth:customer')->name('cart.index');
 Route::get('/checkout', [ShoppingController::class, 'checkout'])->middleware('auth:customer')->name('checkout.index');
