@@ -113,6 +113,39 @@ class ProductSeeder extends Seeder
         'description' => 'Smooth acrylic yarn, perfect for lightweight summer projects.',
         'image' => 'smooth_acrylic_mintgreen.png'
     ]);
+
+    Product::create([
+        'name' => 'Wooden Knitting Needles',
+        'material' => 'Knitting Needles',
+        'weight' => 'Standard',
+        'color' => 'Natural Brown',
+        'length' => 25,
+        'price' => 7.99,
+        'description' => 'High-quality wooden knitting needles, perfect for all your knitting projects.',
+        'image' => 'wooden_knitting_needles.png'
+    ]);
+
+    Product::create([
+        'name' => 'Aluminum Knitting Needles',
+        'material' => 'Knitting Needles',
+        'weight' => 'Standard',
+        'color' => 'Silver',
+        'length' => 30,
+        'price' => 9.99,
+        'description' => 'Durable and lightweight aluminum knitting needles for all knitting levels.',
+        'image' => 'aluminum_knitting_needles.png'
+    ]);
+
+    Product::create([
+        'name' => 'Circular Knitting Needles',
+        'material' => 'Knitting Needles',
+        'weight' => 'Flexible',
+        'color' => 'Black',
+        'length' => 60,
+        'price' => 12.99,
+        'description' => 'Flexible circular knitting needles, ideal for knitting in the round.',
+        'image' => 'circular_knitting_needles.png'
+    ]);
 }
 
 }

@@ -40,6 +40,7 @@ Route::get('/shop', [ShoppingController::class, 'index'])->middleware('auth:cust
 Route::get('/shop/wool', [ShoppingController::class, 'wool'])->middleware('auth:customer')->name('shop.wool');
 Route::get('/shop/cotton', [ShoppingController::class, 'cotton'])->middleware('auth:customer')->name('shop.cotton');
 Route::get('/shop/acrylic', [ShoppingController::class, 'acrylic'])->middleware('auth:customer')->name('shop.acrylic');
+Route::get('/shop/knitting-needles', [ShoppingController::class, 'knittingNeedles'])->middleware('auth:customer')->name('shop.knittingNeedles');
 Route::get('/add-to-cart/{id}', [ShoppingController::class, 'addToCart'])->middleware('auth:customer')->name('cart.add');
 Route::get('/cart', [ShoppingController::class, 'cart'])->middleware('auth:customer')->name('cart.index');
 Route::get('/checkout', [ShoppingController::class, 'checkout'])->middleware('auth:customer')->name('checkout.index');
