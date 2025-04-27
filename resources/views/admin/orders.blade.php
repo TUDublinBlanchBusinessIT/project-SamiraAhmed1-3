@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container mt-5">
+    <!-- Back to Dashboard Button -->
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mb-3">🏠 Back to Dashboard</a>
+
     <h2>All Orders</h2>
+    
     @foreach($orders as $order)
         <div class="card mb-4">
             <div class="card-header">

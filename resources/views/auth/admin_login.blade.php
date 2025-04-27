@@ -62,6 +62,14 @@
                             @endif
                         </div>
                     </form>
+
+                    <!-- Simple Button to go to Customer Login -->
+                    <div class="form-group text-center mt-3">
+                        <a href="{{ route('customer.login') }}" class="btn btn-sm btn-secondary">
+                            Go to Customer Login
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>

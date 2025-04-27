@@ -3,7 +3,10 @@
 @section('content')
 <div class="container mt-5">
     <h2>Registered Customers</h2>
-    
+
+    <!-- Back to Dashboard Button -->
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mb-3">🏠 Back to Dashboard</a>
+
     @if(session('success'))
         <div class="alert alert-success" id="success-alert">
             {{ session('success') }}
