@@ -51,6 +51,15 @@ public function knittingNeedles()
     return view('shop.knittingNeedles', compact('products'));
 }
 
+public function crochetHooks()
+{
+    // Fetch only crochet hooks products
+    $products = Product::where('material', 'Crochet Hook')->get();
+
+    // Return the crochet hooks products view
+    return view('shop.crochetHooks', compact('products'));
+}
+
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);

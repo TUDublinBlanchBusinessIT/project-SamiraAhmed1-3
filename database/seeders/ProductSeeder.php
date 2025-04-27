@@ -146,6 +146,39 @@ class ProductSeeder extends Seeder
         'description' => 'Flexible circular knitting needles, ideal for knitting in the round.',
         'image' => 'circular_knitting_needles.png'
     ]);
+
+    Product::create([
+        'name' => 'Aluminum Crochet Hook Set',
+        'material' => 'Crochet Hook',
+        'weight' => 'Standard',
+        'color' => 'Silver',
+        'length' => 15,
+        'price' => 9.99,
+        'description' => 'Durable and smooth aluminum crochet hooks, perfect for all types of crochet projects.',
+        'image' => 'aluminum_crochet_hook_set.png'
+    ]);
+
+    Product::create([
+        'name' => 'Wooden Crochet Hooks',
+        'material' => 'Crochet Hook',
+        'weight' => 'Standard',
+        'color' => 'Dark Brown',
+        'length' => 12,
+        'price' => 6.49,
+        'description' => 'Beautiful and sturdy wooden crochet hooks for fine craftsmanship.',
+        'image' => 'wooden_crochet_hooks.png'
+    ]);
+
+    Product::create([
+        'name' => 'Ergonomic Crochet Hooks',
+        'material' => 'Crochet Hook',
+        'weight' => 'Lightweight',
+        'color' => 'Purple',
+        'length' => 13,
+        'price' => 11.99,
+        'description' => 'Ergonomic crochet hooks that reduce hand fatigue, perfect for long crochet sessions.',
+        'image' => 'ergonomic_crochet_hooks.png'
+    ]);
 }
 
 }

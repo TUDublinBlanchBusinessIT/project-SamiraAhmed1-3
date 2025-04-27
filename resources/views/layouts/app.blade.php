@@ -75,7 +75,7 @@
                 <li><a href="{{ route('shop.cotton') }}">🌾 Cotton</a></li>
                 <li><a href="{{ route('shop.acrylic') }}">💧 Acrylic</a></li>
                 <li><a href="{{ route('shop.knittingNeedles') }}">🪡 Knitting Needles</a></li>
-                <li><a href="#">🧵 Crochet Hooks</a></li>
+                <li><a href="{{ route('shop.crochetHooks') }}">🧶 Crochet Hooks</a></li>
             </ul>
         </div>
     @endauth
