@@ -21,6 +21,17 @@ class ShoppingController extends Controller
         $products = Product::where('material', 'Wool')->get();
         return view('shop.wool', compact('products'));
     }
+    
+    // Method to display Cotton Products
+    public function cotton()
+    {
+        // Fetch only cotton products
+        $products = Product::where('material', 'Cotton')->get();
+    
+        // Return the cotton products view
+        return view('shop.cotton', compact('products'));
+    }
+    
 
     public function addToCart($id)
     {

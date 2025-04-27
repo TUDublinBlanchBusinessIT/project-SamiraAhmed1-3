@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Knit & Knot') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -72,7 +72,7 @@
             <ul class="list-unstyled">
                 <li><a href="{{ route('shop') }}">🧵 All Yarn</a></li>
                 <li><a href="{{ route('shop.wool') }}">🧶 Wool</a></li>
-                <li><a href="#">🌾 Cotton</a></li>
+                <li><a href="{{ route('shop.cotton') }}">🌾 Cotton</a></li>
                 <li><a href="#">💧 Acrylic</a></li>
                 <li><a href="#">🪡 Knitting Needles</a></li>
                 <li><a href="#">🧵 Crochet Hooks</a></li>
