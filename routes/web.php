@@ -51,6 +51,7 @@ Route::post('/checkout', [ShoppingController::class, 'placeOrder'])->middleware(
 Route::middleware('auth')->group(function () {
     Route::get('/admin/customers', [UserController::class, 'viewCustomers'])->name('admin.customers');
     Route::get('/admin/orders', [UserController::class, 'viewOrders'])->name('admin.orders');
+    Route::put('/admin/orders/{id}/update-status', [UserController::class, 'updateOrder'])->name('admin.orders.update');
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
